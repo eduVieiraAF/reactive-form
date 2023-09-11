@@ -1,0 +1,51 @@
+<form [formGroup]="registerForm">
+  <label for="firstName">First Name:</label>
+  <input
+    type="text"
+    id="firstName"
+    formControlName="firstName"
+    placeholder="First Name"
+  />
+  <span
+    *ngIf="
+      registerForm.get('firstName')?.errors &&
+      (registerForm.get('firstName')?.touched ||
+        registerForm.get('firstName')?.dirty)
+    "
+  >
+    *required</span
+  >
+  <br />
+
+  <label for="lastName">Last Name:</label>
+  <input
+    type="text"
+    id="lastName"
+    formControlName="lastName"
+    placeholder="Last Name"
+  />
+  <span
+    *ngIf="
+      registerForm.get('lastName')?.errors &&
+      (registerForm.get('lastName')?.touched ||
+        registerForm.get('lastName')?.dirty)
+    "
+    >*required</span
+  >
+  <br />
+
+  <label for="email">Email:</label>
+  <input type="text" id="email" formControlName="email" placeholder="Email" />
+  <br />
+  <hr />
+
+  {{ registerForm.get("firstName")?.errors | json }}
+  {{ registerForm.get("lastName")?.errors | json }}
+  {{ registerForm.get("email")?.errors | json }}
+  <br />
+  <br />
+
+  <button (click)="submitForm()" [disabled]="!registerForm.valid">
+    Submit
+  </button>
+</form>
