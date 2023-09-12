@@ -10,14 +10,15 @@ export class ReactiveFormsComponent {
   constructor(private formBuilder: FormBuilder) { }
 
   public registerForm: FormGroup = this.formBuilder.group({
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
+    firstName: ['', Validators.compose([Validators.required, Validators.maxLength(15), Validators.minLength(3)])],
+    lastName: ['', Validators.compose([Validators.required, Validators.maxLength(15), Validators.minLength(3)])],
     email: ['', Validators.compose([Validators.required, Validators.email])],
   });
 
   public submitForm() {
-    console.log(this.registerForm.value);
-    // console.log(this.registerForm.value.firstName);
-    this.registerForm.reset();
+    if (this.registerForm.valid) {
+      console.log(this.registerForm.value);
+      this.registerForm.reset();
+    }
   }
 }
